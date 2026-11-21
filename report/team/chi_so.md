@@ -60,7 +60,7 @@ Tái lập: chạy `python -X utf8 lab13.py --rui-ro` trong `src/` (có thể th
 
 ### Cảnh báo bổ sung từ B4 đã có kết quả
 
-[B4 của Cường](bang_chi_phi.md#b4--nếu-phải-xem-lại-tất-cả) cho thấy xem lại 100% trong phạm vi `noi_dia` + `hang_nang` có chi phí **11.743 đ/việc, 0,98× mức 12.000 đ** nếu làm lại 9 phút/ca; nếu dùng thời gian làm lại trung bình dữ liệu thì lên **12.415 đ/việc, 1,03×** (đều **simulated**, chưa cộng cố định). Vì vậy, event phải đo cả `review_minutes` và `rework_minutes`, không chỉ số ca. Đây là hai kịch bản giả định của B4, không phải chi phí pilot đã đo. Chờ Trí chốt lộ trình xem lại và luật dừng trước khi chuyển cảnh báo thành điều kiện vận hành.
+[B4 của Cường](bang_chi_phi.md#b4--nếu-phải-xem-lại-tất-cả) cho thấy xem lại 100% trong phạm vi `noi_dia` + `hang_nang` có chi phí **11.743 đ/việc, 0,98× mức 12.000 đ** nếu làm lại 9 phút/ca; nếu dùng thời gian làm lại trung bình dữ liệu thì lên **12.415 đ/việc, 1,03×** (đều **simulated**, chưa cộng cố định). Vì vậy, event phải đo cả `review_minutes` và `rework_minutes`, không chỉ số ca. Đây là hai kịch bản giả định của B4, không phải chi phí pilot đã đo. Tuần 1 xem lại 100% giữ rollout ở bước hiện tại; chỉ áp dụng Ngưỡng chi phí A3 8.000 đ/việc, chưa cộng cố định, khi vượt ngưỡng trong 2 tuần liên tiếp.
 
 ### Trạng thái bàn giao
 

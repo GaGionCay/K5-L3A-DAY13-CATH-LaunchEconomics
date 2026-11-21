@@ -21,12 +21,12 @@
 - Viết năm điều kiện D2 về nhóm đối chứng đồng thời, phân bổ ngẫu nhiên phân tầng depot, giảm spillover, chốt trước chỉ số/ngưỡng và đủ 20 cụm mỗi nhánh.
 - Khai báo tỉ lệ mở lại baseline toàn bộ 4,25%, baseline trong phạm vi pilot khoảng 3,97%, ngưỡng chênh với đối chứng 2 điểm phần trăm và trần tuyệt đối 6%.
 - Viết ba luật dừng đủ bốn vế NẾU – TRONG – THÌ – KHÔNG THÌ cho an toàn/reopen, chi phí và mức độ sử dụng.
-- Hoàn thiện A3: pilot gồm `noi_dia` và `hang_nang` tại D01–D06; loại `quoc_te` và `doi_tac`; ngưỡng chi phí là 8.000 đồng cho mỗi việc thành công.
+- Hoàn thiện A3: pilot gồm `noi_dia` và `hang_nang` tại D01–D12; loại `quoc_te` và `doi_tac`; Ngưỡng chi phí A3 là 8.000 đồng cho mỗi việc thành công, chưa cộng chi phí cố định.
 - Cập nhật `lab13.py` để phạm vi được đọc từ YAML thay vì hard-code, đồng thời duy trì kiểm tra D1/D2, reopen rate và luật dừng.
 
 ## 4. Bằng chứng
 
-- `report/team/pilot_01an.yaml`: cấu hình pilot cuối cùng, gồm phạm vi A3, ngưỡng chi phí, D1, D2, reopen rate và luật dừng.
+- `report/team/pilot_plan.yaml`: cấu hình pilot cuối cùng, gồm phạm vi A3, ngưỡng chi phí, D1, D2, reopen rate và luật dừng.
 - `src/lab13.py`: các hàm `tai_cau_hinh_pilot()` và `danh_gia_reopen_rate()` nạp, kiểm tra và dùng cấu hình này.
 - Đã kiểm tra cỡ mẫu tính lại là 1.251 và 859; `baseline_scope` từ dữ liệu là khoảng 0,0397; YAML đọc được và không còn placeholder cho phần cấu hình pilot.
 

@@ -20,7 +20,7 @@ BASELINE = 12000    # đồng cho 1 yêu cầu khi nhân viên tự làm (6 phú
 
 
 # ---------- Nhiệm vụ D · Cấu hình pilot ----------
-PILOT_CONFIG_PATH = Path(__file__).resolve().parents[1] / 'report' / 'team' / 'pilot_01an.yaml'
+PILOT_CONFIG_PATH = Path(__file__).resolve().parents[1] / 'report' / 'team' / 'pilot_plan.yaml'
 
 
 def co_mau_hai_ty_le(p1, p2, alpha=0.05, power=0.80):
@@ -38,7 +38,7 @@ def tai_cau_hinh_pilot(path=PILOT_CONFIG_PATH):
     with Path(path).open(encoding='utf-8') as file:
         config = yaml.safe_load(file)
     pilot = config['pilot']
-    required = ('scope', 'cost_threshold_vnd', 'sample_size', 'reopen_rate',
+    required = ('scope', 'cost_threshold_vnd', 'cost_rule', 'sample_size', 'reopen_rate',
                 'identifiability', 'stop_rules')
     missing = [key for key in required if key not in pilot]
     if missing:
@@ -48,6 +48,14 @@ def tai_cau_hinh_pilot(path=PILOT_CONFIG_PATH):
         raise ValueError('Phạm vi A3 phải có loại yêu cầu và depot được đưa vào pilot.')
     if not isinstance(pilot['cost_threshold_vnd'], (int, float)) or pilot['cost_threshold_vnd'] <= 0:
         raise ValueError('Ngưỡng chi phí A3 phải là số dương theo đồng/việc thành công.')
+    if (pilot['assignment'].get('planned_staff_total', 0)
+            < 2 * pilot['sample_size']['staff_per_arm']):
+        raise ValueError('Pilot cần đủ nhân viên cho 20 cụm mỗi nhánh.')
+    cost_rule = pilot['cost_rule']
+    if (cost_rule.get('label') != 'Ngưỡng chi phí A3'
+            or cost_rule.get('first_week_100_review_cps_vnd') != 11743
+            or not cost_rule.get('excludes_fixed_costs')):
+        raise ValueError('Thiếu cấu hình Ngưỡng chi phí A3 hoặc xử lý tuần xem lại 100%.')
     if pilot['assignment']['unit'] != 'staff' or pilot['primary_metric']['clusters_per_arm'] < 20:
         raise ValueError('Pilot phải phân bổ theo nhân viên với ít nhất 20 cụm mỗi nhánh.')
     if pilot['primary_metric']['n_per_arm'] != pilot['sample_size']['accepted_n_per_arm']:
@@ -78,7 +86,12 @@ def danh_gia_reopen_rate(reqs, pilot):
         'baseline_scope': baseline_scope,
         'relative_stop_gap': reopen['relative_stop_gap'],
         'absolute_stop_ceiling': reopen['absolute_stop_ceiling'],
+        'reopen_aggregation': reopen['aggregation'],
+        'hang_nang_reference_rate': reopen['hang_nang_reference_rate'],
+        'cost_threshold_label': pilot['cost_rule']['label'],
         'cost_threshold_vnd': pilot['cost_threshold_vnd'],
+        'cost_excludes_fixed_costs': pilot['cost_rule']['excludes_fixed_costs'],
+        'first_week_100_review_cps_vnd': pilot['cost_rule']['first_week_100_review_cps_vnd'],
     }
 
 
