@@ -12,8 +12,8 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Nguyễn Thế Cường | 2A202603355 | 26ai.cuongnt2@vinuni.edu.vn | Chill2004 | Người viết code (A, B); sau giải lao kiểm số D1 |
-|   2 |        |      |       |        |         |
-|   3 |        |      |       |        |         |
+|   2 | Hoàng Ngọc Minh Trí | 2A202603379 | 26ai.trihnm@vinuni.edu.vn |        | Người kiểm số (nhiệm vụ D) |
+|   3 | Chử Thị Ánh | 2A202603360 | ai26.anhct@vinuni.edu.vn |        | Người gắn nhãn 1 (nhiệm vụ C bộ 1, E) |
 |   4 | Nguyễn Thị Thu Hà | 23001603 | nha253158@gmail.com | nha253158-hub | Người gắn nhãn 2, kiêm giữ hồ sơ |
 
 Bốn vai của lab:
@@ -54,6 +54,40 @@ Sao chép mục dưới đây cho từng thành viên.
 
 - Commit trên nhánh `ntc`: `28695bd`, `b81ec83` (CP1), `5e444db` (CP2).
 - File: `src/lab13.py`, `report/team/bang_chi_phi.md`, `report/team/2A202603355_NguyenTheCuong.md`.
+
+## HoangNgocMinhTri-2A202603379
+
+### Phần việc phụ trách
+
+- Nhiệm vụ D: cỡ mẫu D1, năm điều kiện D2, tỉ lệ mở lại, ba luật dừng
+- Hoàn thiện A3 (phạm vi pilot) và `report/team/pilot_plan.yaml`
+
+### Đóng góp cụ thể
+
+- D1: 1.251 yêu cầu/nhóm (MDE 5 điểm); thiết kế chấp nhận 20 nhân viên/nhóm, MDE 6 điểm, 859 mẫu hiệu dụng, DE 6,96
+- Ba luật dừng đủ NẾU – TRONG – THÌ – KHÔNG THÌ; ngưỡng chi phí 8.000 đ/việc thành công
+- Cập nhật `lab13.py` đọc phạm vi pilot từ YAML
+
+### Bằng chứng
+
+- `report/team/pilot_plan.yaml`, `src/lab13.py`, `report/team/2A202603379_HoangNgocMinhTri.md`
+
+## ChuThiAnh-2A202603360
+
+### Phần việc phụ trách
+
+- Nhiệm vụ C: bộ nhãn 1 (20 ca)
+- Nhiệm vụ E: E1 chỉ số và event, E2 rủi ro kinh tế
+
+### Đóng góp cụ thể
+
+- E1: ba chỉ số (82,83%; 27,12%; 4,25%), hai chỉ số đề xuất, tám event có `trace_id`
+- E2: hai dòng rủi ro đối chiếu với B1 của Cường, cảnh báo B4
+- Bộ nhãn 1 có Codex hỗ trợ; Ánh đã review và xác nhận ngày 21/11
+
+### Bằng chứng
+
+- `report/team/chi_so.md`, `report/team/dan_chung_nhan_C_bo1_Anh.md`, `report/team/2A202603360_ChuThiAnh.md`
 
 ## NguyenThiThuHa-23001603
 
