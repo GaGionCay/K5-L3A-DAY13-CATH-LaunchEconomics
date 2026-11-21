@@ -42,6 +42,11 @@ def tai_cau_hinh_pilot(path=PILOT_CONFIG_PATH):
     missing = [key for key in required if key not in pilot]
     if missing:
         raise ValueError(f'Thiếu khóa cấu hình pilot: {", ".join(missing)}')
+    scope = pilot['scope']
+    if not isinstance(scope, dict) or not scope.get('included_request_types') or not scope.get('included_depots'):
+        raise ValueError('Phạm vi A3 phải có loại yêu cầu và depot được đưa vào pilot.')
+    if not isinstance(pilot['cost_threshold_vnd'], (int, float)) or pilot['cost_threshold_vnd'] <= 0:
+        raise ValueError('Ngưỡng chi phí A3 phải là số dương theo đồng/việc thành công.')
     if pilot['assignment']['unit'] != 'staff' or pilot['primary_metric']['clusters_per_arm'] < 20:
         raise ValueError('Pilot phải phân bổ theo nhân viên với ít nhất 20 cụm mỗi nhánh.')
     if pilot['primary_metric']['n_per_arm'] != pilot['sample_size']['accepted_n_per_arm']:
@@ -62,8 +67,10 @@ def tai_cau_hinh_pilot(path=PILOT_CONFIG_PATH):
 
 def danh_gia_reopen_rate(reqs, pilot):
     """Áp dụng phạm vi và ngưỡng reopen trong config vào dữ liệu baseline."""
-    scope = ('noi_dia', 'hang_nang')
-    baseline_scope = reqs.loc[reqs['loai'].isin(scope), 'mo_lai_trong_7_ngay'].mean()
+    scope = pilot['scope']
+    in_scope = (reqs['loai'].isin(scope['included_request_types'])
+                & reqs['depot'].isin(scope['included_depots']))
+    baseline_scope = reqs.loc[in_scope, 'mo_lai_trong_7_ngay'].mean()
     reopen = pilot['reopen_rate']
     return {
         'baseline_all': reqs['mo_lai_trong_7_ngay'].mean(),
@@ -183,7 +190,9 @@ if __name__ == '__main__':
     # ---------- A4 · Chi phí cố định cho phạm vi pilot noi_dia + hang_nang ----------
     CO_DINH_THANG = 40_000_000       # đồng / tháng
     YC_THANG = 45_000                # yêu cầu hoàn phí / tháng ở quy mô đầy đủ (mọi loại)
-    pham_vi = reqs[reqs['loai'].isin(['noi_dia', 'hang_nang'])]
+    scope = pilot['scope']
+    pham_vi = reqs[reqs['loai'].isin(scope['included_request_types'])
+                    & reqs['depot'].isin(scope['included_depots'])]
     kq_pv = mo_hinh(runs, pham_vi)
     # Việc thành công trong phạm vi tính trên toàn bộ 1.200 yêu cầu của mẫu, rồi nhân lên 45.000 / tháng.
     tc_tren_tong = kq_pv['thanh_cong'] / len(reqs)

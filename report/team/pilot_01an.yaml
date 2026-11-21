@@ -19,7 +19,10 @@
 
 pilot:
   owner: "Giám đốc vận hành LogiX-VN"
-  scope: "Chỉ noi_dia và hang_nang tại các depot D01-D06; loại quoc_te (1,88×) và doi_tac (0,85×) vì không đạt ngưỡng chi phí pilot"
+  scope:
+    included_request_types: ["noi_dia", "hang_nang"]
+    included_depots: ["D01", "D02", "D03", "D04", "D05", "D06"]
+    excluded_request_types: ["quoc_te", "doi_tac"]
   cost_threshold_vnd: 8000
   assignment:
     unit: "staff"
