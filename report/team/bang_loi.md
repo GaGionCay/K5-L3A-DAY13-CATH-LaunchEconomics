@@ -6,7 +6,7 @@
 
 Người gắn nhãn 1: Chử Thị Ánh · Người gắn nhãn 2: Hà.
 
-**Bộ 1 là nhãn đề xuất có Codex hỗ trợ đọc đề bài, chưa được Ánh tự rà và xác nhận.** Không ghi nhận đã tự gắn độc lập trong 8 phút. Theo RULES.md, hai người phải gắn độc lập trước khi so; không sửa bộ nhãn độc lập sau khi so. **Bộ 2 của Hà do Claude hỗ trợ gắn; Hà đã tự rà cả 20 ca và xác nhận đúng, nhưng rà sau khi đã có nhãn, nên không phải gắn độc lập từ đầu. Bộ 1 của Ánh vẫn chờ Ánh tự rà.** Theo `RULES.md`, không dùng AI để tạo nhãn lỗi.
+**Cả hai bộ nhãn có AI hỗ trợ và không được gắn độc lập từ đầu.** Bộ 1 có Codex hỗ trợ đọc đề bài; Ánh đã review và xác nhận đồng ý cả 20 nhãn ngày 21/11/2026, bao gồm ca 9 giữ nhãn Do người dùng. Bộ 2 do Claude hỗ trợ gắn; Hà đã tự rà cả 20 ca và xác nhận đúng, nhưng rà sau khi đã có nhãn. Theo RULES.md, hai người phải gắn độc lập trước khi so, nên kết quả khớp bên dưới không được ghi là đồng thuận độc lập.
 
 | Ca | Nhãn người 1 | Nhãn người 2 | Trùng? | Nhãn thống nhất |
 | --: | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ Người gắn nhãn 1: Chử Thị Ánh · Người gắn nhãn 2: Hà.
 | 19 | Giới hạn hệ thống | Giới hạn hệ thống | ✓ | Giới hạn hệ thống |
 | 20 | Hệ thống | Hệ thống | ✓ | Hệ thống |
 
-**Tỉ lệ đồng thuận:** 20 / 20 = 100% (số khớp giữa hai bộ nhãn đề xuất ở trên; bộ 1 chờ Ánh tự rà; không ghi là đồng thuận độc lập).
+**Tỉ lệ đồng thuận:** 20 / 20 = 100% (số khớp giữa hai bộ nhãn đề xuất ở trên; Ánh và Hà đều đã rà, nhưng không ghi là đồng thuận độc lập).
 
 ## Quy tắc phân biệt cho các ca không trùng
 
@@ -55,6 +55,8 @@ Cách phát hiện phải đo được (event, ngưỡng, tần suất). Ngườ
 | 17 | Ngầm | Kiểm tra mẫu 100 đơn/tuần so với bảng giá hiện hành; ngưỡng 1% đơn lệch | Xoá bộ nhớ đệm khi có bảng giá mới, ghi phiên bản bảng giá vào trace | Kế toán trưởng |
 
 ## Lý do đề xuất bộ 1 để Ánh tự rà
+
+Xem [dẫn chứng từng ca](dan_chung_nhan_C_bo1_Anh.md): nguyên văn 20 ca từ DOCX, nhãn đề xuất, lý do và ghi chú review của Ánh ở ca 9.
 
 Nguồn: `docs/Ngay13_Lab13_De_bai_hoc_vien.docx`, mục “Hai mươi ca lỗi”. Không phải đáp án chính thức hay kết quả thống nhất với Hà.
 

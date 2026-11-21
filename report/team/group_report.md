@@ -16,7 +16,7 @@ Nhóm dựng bộ hồ sơ launch v0 cho trợ lý hoàn phí của LogiX-VN nh�
 
 - **Nhiệm vụ A** (Mô hình chi phí): viết 3 hàm kinh tế chạy lại (A1), hàm `mo_hinh` tính chi phí mỗi việc thành công từ trace (A2), tách theo loại (A3), cộng chi phí cố định (A4). Kết quả: 4.472 đ/việc [simulated], gấp 16,3 lần hoá đơn. → [`bang_chi_phi.md`](bang_chi_phi.md)
 - **Nhiệm vụ B** (Bảng độ nhạy): 9 kịch bản B1, xếp hạng 3 yếu tố, B3 giới hạn chạy lại, B4 xem lại 100%. → [`bang_chi_phi.md`](bang_chi_phi.md)
-- **Nhiệm vụ C** (Bảng lỗi): gắn nhãn 20 ca lỗi theo 5 loại Google PAIR, hai bộ nhãn khớp 20/20, cả hai bộ có AI hỗ trợ; Hà đã tự rà và xác nhận, bộ của Ánh chờ Ánh tự rà. Bảng khắc phục 5 ca đủ 5 loại. → [`bang_loi.md`](bang_loi.md)
+- **Nhiệm vụ C** (Bảng lỗi): gắn nhãn 20 ca lỗi theo 5 loại Google PAIR, hai bộ nhãn khớp 20/20, cả hai bộ có AI hỗ trợ; Hà đã tự rà và xác nhận, Ánh đã review và xác nhận bộ của mình ngày 21/11. Bảng khắc phục 5 ca đủ 5 loại. → [`bang_loi.md`](bang_loi.md)
 - **Nhiệm vụ D** (Pilot plan): tính cỡ mẫu, chọn chia theo nhân viên 20+20, mức chênh 6 điểm, 3 luật dừng. → [`pilot_plan.yaml`](pilot_plan.yaml)
 - **Nhiệm vụ E** (Chỉ số, rủi ro, hồ sơ): 3 chỉ số + 2 chỉ số đề xuất, 8 event có `trace_id`, 2 dòng rủi ro kinh tế + cảnh báo B4, ghép hồ sơ 7 mục. → [`chi_so.md`](chi_so.md), [`ho_so_launch_v0.md`](ho_so_launch_v0.md)
 

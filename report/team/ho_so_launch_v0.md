@@ -10,7 +10,7 @@ Nhóm: CATH · Lớp: L3A
 | 2 · Ba yếu tố nhạy nhất | 1. Số ca làm lại (+51,8%) · 2. Tỉ lệ xem lại (+40,7%) · 3. Lương nhân viên (+23,1%) | Giả lập | Người kiểm số |
 | 3 · So với nhân viên tự làm | Chi phí cả hệ thống: 5.865 đ/yêu cầu = 0,49× của 12.000 đ [simulated]. Trong phạm vi noi_dia + hang_nang: 4.599 đ = 0,38× (đã cộng cố định 40 triệu/tháng) [simulated] | Giả lập | Người viết code |
 | 4 · Chỉ số chính, chỉ số dùng, chỉ số an toàn | Chính: 82,83% đóng trong 24h và không mở lại 7 ngày (994/1.200). Dùng: 27,12% bỏ qua gợi ý (48/177). An toàn: 4,25% mở lại trong 7 ngày (51/1.200) | Xong, có bằng chứng | Người kiểm số |
-| 5 · Bảng lỗi và cách khắc phục | hai bộ nhãn khớp 20/20 có AI hỗ trợ; Hà đã tự rà và xác nhận, Ánh còn chờ tự rà; 5 ca khắc phục đủ 5 loại Google PAIR, mỗi dòng có cách phát hiện đo được và vai trò phụ trách | Xong, có bằng chứng | Người gắn nhãn 1 & 2 |
+| 5 · Bảng lỗi và cách khắc phục | hai bộ nhãn khớp 20/20 có AI hỗ trợ; Hà đã tự rà và xác nhận, Ánh đã review và xác nhận ngày 21/11; 5 ca khắc phục đủ 5 loại Google PAIR, mỗi dòng có cách phát hiện đo được và vai trò phụ trách | Xong, có bằng chứng | Người gắn nhãn 1 & 2 |
 | 6 · Pilot plan | Chia theo nhân viên, 20 + 20, mức chênh 6 điểm (859/nhóm, DE 6,96). 3 luật dừng đúng mẫu NẾU–TRONG–THÌ–KHÔNG THÌ. Quyết định: 2027-01-05 | Xong, có bằng chứng | PM trợ lý hoàn phí |
 | 7 · Rủi ro kinh tế | Làm lại gấp đôi → 6.787 đ (+51,8%) [simulated]. Xem lại 100% → 11.743 đ = 0,98×, hoặc 12.415 đ = 1,03× nếu làm lại 15,3 phút [simulated]. Khối lượng giảm nửa → cố định +2.370 đ/việc [simulated] | Giả lập | PM trợ lý hoàn phí |
 

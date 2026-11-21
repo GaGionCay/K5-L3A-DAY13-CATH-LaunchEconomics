@@ -65,7 +65,7 @@ Sao chép mục dưới đây cho từng thành viên.
 
 ### Đóng góp cụ thể
 
-- Gắn nhãn 20 ca lỗi (bộ 2), đã so với bộ 1 của Ánh: khớp 20/20; bộ 2 có Claude hỗ trợ, Hà đã tự rà và xác nhận; bộ 1 chờ Ánh tự rà
+- Gắn nhãn 20 ca lỗi (bộ 2), đã so với bộ 1 của Ánh: khớp 20/20; bộ 2 có Claude hỗ trợ, Hà đã tự rà và xác nhận; Ánh đã review và xác nhận bộ 1 ngày 21/11
 - Bảng khắc phục 5 ca (9, 7, 18, 4, 17) đủ 5 loại, có cách phát hiện đo được và vai trò phụ trách
 - Hồ sơ launch v0 bảy mục, đề xuất Go có điều kiện, số simulated có nhãn
 
