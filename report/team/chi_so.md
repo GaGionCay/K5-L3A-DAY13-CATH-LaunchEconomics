@@ -45,9 +45,9 @@ Mọi event có `event_id`, `event_at`, `request_id` và `trace_id`. Hệ thốn
 
 ## E2 · Rủi ro kinh tế
 
-Số đối chiếu tạm thời tính trên toàn bộ mẫu B1, với 978 việc thành công. Chi phí gốc là 4.373.585,132 đ, trong đó xem lại 1.780.000 đ và làm lại 2.264.000 đ (đều **simulated**). Mỗi kịch bản cộng thêm đúng khoản chi phí bị nhân đôi vào tổng gốc, chia cho 978. Cần đối chiếu với [bảng B1 của nhóm](bang_chi_phi.md#b1--đổi-từng-yếu-tố) khi bảng được điền.
+Đã đối chiếu hai kịch bản dưới đây với [bảng B1 của Cường](bang_chi_phi.md#b1--đổi-từng-yếu-tố) và chạy lại `src/lab13.py` sau merge `d75e1fc`. Phạm vi là toàn bộ 1.200 yêu cầu, với 978 việc thành công. Chi phí gốc là 4.373.585,132 đ, trong đó xem lại 1.780.000 đ và làm lại 2.264.000 đ (đều **simulated**). Mỗi kịch bản cộng thêm đúng khoản chi phí bị nhân đôi vào tổng gốc, chia cho 978. Đây là chi phí biến đổi, chưa cộng chi phí cố định; không phải chi phí riêng của phạm vi pilot thu hẹp.
 
-Tái lập độc lập với phần A/B chưa hoàn thành: chạy `python -X utf8 lab13.py --rui-ro` trong `src/` (có thể thêm `--chi-so` để in cả E1). Chi phí gốc cộng token và tool của mọi lần chạy, kể cả lỗi, cộng hai khoản thời gian simulated; mẫu số chỉ đếm `ket_qua == 'thanh_cong'`.
+Tái lập: chạy `python -X utf8 lab13.py --rui-ro` trong `src/` (có thể thêm `--chi-so` để in cả E1). Lệnh E2 dùng chung `mo_hinh` của Cường để lấy chi phí gốc. Chi phí gốc cộng token và tool của mọi lần chạy, kể cả lỗi, cộng hai khoản thời gian simulated; mẫu số chỉ đếm `ket_qua == 'thanh_cong'`. Chạy `python -X utf8 lab13.py` để đối chiếu trực tiếp toàn bộ A/B; B1 làm tròn phần trăm một chữ số, bảng E2 giữ hai chữ số.
 
 - Làm lại gấp đôi: `(4.373.585,132 + 2.264.000) / 978`; mức tăng `2.264.000 / 4.373.585,132` (**simulated**).
 - Xem lại gấp đôi: `(4.373.585,132 + 1.780.000) / 978`; mức tăng `1.780.000 / 4.373.585,132` (**simulated**).
@@ -57,3 +57,13 @@ Tái lập độc lập với phần A/B chưa hoàn thành: chạy `python -X u
 | --- | --- | --- | --- | --- |
 | Số ca làm lại tăng gấp đôi với số phút trung bình mỗi ca giữ nguyên | **6.787 đ/việc thành công (+51,77%, simulated)** | Tỉ lệ làm lại theo tuần vượt 7%, tính từ số yêu cầu có `staff_rework_completed` chia số yêu cầu nhánh trợ lý | Rà tối đa 20 trace làm lại trong tuần, ưu tiên loại có nhiều ca nhất trước khi chuyển bước pilot | PM trợ lý hoàn phí |
 | Tỉ lệ xem lại tăng gấp đôi với số phút trung bình mỗi ca giữ nguyên | **6.292 đ/việc thành công (+40,70%, simulated)** | Tỉ lệ yêu cầu được xem lại đạt 29,50% trong một tuần, gấp đôi mức chạy thử 177/1.200 = 14,75% | Rà tối đa 20 quyết định xem lại theo loại yêu cầu và nguyên nhân, điều chỉnh luồng xem lại trước khi chuyển bước pilot | Trưởng nhóm CSKH |
+
+### Cảnh báo bổ sung từ B4 đã có kết quả
+
+[B4 của Cường](bang_chi_phi.md#b4--nếu-phải-xem-lại-tất-cả) cho thấy xem lại 100% trong phạm vi `noi_dia` + `hang_nang` có chi phí **11.743 đ/việc, 0,98× mức 12.000 đ** nếu làm lại 9 phút/ca; nếu dùng thời gian làm lại trung bình dữ liệu thì lên **12.415 đ/việc, 1,03×** (đều **simulated**, chưa cộng cố định). Vì vậy, event phải đo cả `review_minutes` và `rework_minutes`, không chỉ số ca. Đây là hai kịch bản giả định của B4, không phải chi phí pilot đã đo. Chờ Trí chốt lộ trình xem lại và luật dừng trước khi chuyển cảnh báo thành điều kiện vận hành.
+
+### Trạng thái bàn giao
+
+- Đã xong: E1; hai dòng E2 khớp B1 của Cường; cảnh báo thời gian xem lại/làm lại có nguồn B4.
+- Chờ Trí: phạm vi pilot cuối cùng, ngưỡng an toàn, luật dừng và quyền dừng trong `pilot_plan.yaml`; sau đó mới căn chỉnh ngưỡng theo dõi E2 và phạm vi đo E1.
+- Chờ Hà ghép hồ sơ: đưa E1/E2 vào mục 4 và 7 của `ho_so_launch_v0.md` sau khi có các phần còn lại; không tự kết luận Go khi C/D chưa đủ bằng chứng.

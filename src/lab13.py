@@ -114,14 +114,15 @@ def in_chi_so(reqs):
 
 def in_rui_ro_kinh_te(runs, reqs):
     """Đối chiếu riêng hai dòng E2; không thay thế bảng B1 của nhóm."""
-    token = (runs['tokens_in'].sum() * GIA_VAO
-             + runs['tokens_out'].sum() * GIA_RA) / 1000
-    tool = runs['tool_calls'].sum() * GIA_TOOL
-    xem_lai = reqs['phut_xem_lai_simulated'].sum() * LUONG_PHUT
-    lam_lai = reqs['phut_lam_lai_simulated'].sum() * LUONG_PHUT
-    tong = token + tool + xem_lai + lam_lai
-    thanh_cong = reqs['ket_qua'].eq('thanh_cong').sum()
-    print('E2 · Toàn bộ mẫu, chi phí simulated; chờ đối chiếu B1')
+    # Dùng chung mô hình A/B sau khi merge phần Cường để tránh lệch công thức.
+    if not reqs['ket_qua'].eq('thanh_cong').any():
+        print('E2 · Không xác định chi phí mỗi việc vì không có việc thành công')
+        return
+    goc = mo_hinh(runs, reqs)
+    token, tool = goc['token'], goc['tool']
+    xem_lai, lam_lai = goc['xem_lai'], goc['lam_lai']
+    tong, thanh_cong = goc['tong'], goc['thanh_cong']
+    print('E2 · Toàn bộ mẫu B1, chi phí simulated; dùng chung mo_hinh của A/B')
     print(f'Token: {token:.3f}; tool: {tool:.3f}')
     print(f'Xem lại: {xem_lai:.3f}; làm lại: {lam_lai:.3f}')
     print(f'Tổng gốc: {tong:.3f}; số việc thành công: {thanh_cong}')
@@ -137,7 +138,7 @@ def in_rui_ro_kinh_te(runs, reqs):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--chi-so', action='store_true', help='Chỉ tính ba chỉ số E1')
-    parser.add_argument('--rui-ro', action='store_true', help='Đối chiếu hai dòng E2 độc lập với A/B')
+    parser.add_argument('--rui-ro', action='store_true', help='Đối chiếu hai dòng E2 với mô hình A/B')
     args = parser.parse_args()
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
     if args.chi_so or args.rui_ro:
