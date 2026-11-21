@@ -6,7 +6,7 @@
 
 Người gắn nhãn 1: Chử Thị Ánh · Người gắn nhãn 2: Hà.
 
-**Cả hai bộ nhãn có AI hỗ trợ và không được gắn độc lập từ đầu.** Bộ 1 có Codex hỗ trợ đọc đề bài; Ánh đã review và xác nhận đồng ý cả 20 nhãn ngày 21/11/2026, bao gồm ca 9 giữ nhãn Do người dùng. Bộ 2 do Claude hỗ trợ gắn; Hà đã tự rà cả 20 ca và xác nhận đúng, nhưng rà sau khi đã có nhãn. Theo RULES.md, hai người phải gắn độc lập trước khi so, nên kết quả khớp bên dưới không được ghi là đồng thuận độc lập.
+**Ánh xác nhận hai người đã rà và quyết định nhãn riêng trước khi so, sau đó thống nhất cả 20 ca.** Bộ 1 có Codex hỗ trợ, bộ 2 có Claude hỗ trợ; giữ ghi nhận nguồn AI. Việc rà riêng được ghi theo xác nhận của Ánh, không ghi nhận hai bộ nhãn được tự tạo từ đầu không có AI. Giữ nguyên hai bộ nhãn đã so theo RULES.md.
 
 | Ca | Nhãn người 1 | Nhãn người 2 | Trùng? | Nhãn thống nhất |
 | --: | --- | --- | --- | --- |
@@ -31,13 +31,13 @@ Người gắn nhãn 1: Chử Thị Ánh · Người gắn nhãn 2: Hà.
 | 19 | Giới hạn hệ thống | Giới hạn hệ thống | ✓ | Giới hạn hệ thống |
 | 20 | Hệ thống | Hệ thống | ✓ | Hệ thống |
 
-**Tỉ lệ đồng thuận:** 20 / 20 = 100% (số khớp giữa hai bộ nhãn đề xuất ở trên; Ánh và Hà đều đã rà, nhưng không ghi là đồng thuận độc lập).
+**Tỉ lệ đồng thuận:** 20 / 20 = 100% (tính từ hai cột nhãn đã lưu; Ánh xác nhận hai người đã rà riêng trước khi so và đồng ý kết quả).
 
 ## Quy tắc phân biệt cho các ca không trùng
 
 Không có ca không trùng giữa hai bộ nhãn đề xuất. Quy tắc phân biệt đã dùng:
 
-- **Hệ thống vs. Ngầm:** nếu có người (khách hoặc nhân viên) nhận ra sai → Hệ thống; nếu chỉ phát hiện khi kiểm tra mẫu → Ngầm (ví dụ ca 8, 15 là Hệ thống vì nhân viên bắt được; ca 5, 12, 17 là Ngầm).
+- **Hệ thống vs. Ngầm:** nếu có người (khách hoặc nhân viên) nhận ra sai → Hệ thống; nếu chỉ phát hiện khi kiểm tra mẫu → Ngầm (ca 15 là Hệ thống vì nhân viên bắt được; ca 8 là Hệ thống do viện dẫn điều khoản không tồn tại, không có chi tiết nói nhân viên phát hiện; ca 5, 12, 17 là Ngầm).
 - **Do người dùng vs. Hệ thống:** gốc lỗi là khách nhập sai/chọn sai → Do người dùng, dù trợ lý chưa gợi ý tốt (ca 6, 9).
 - **Giới hạn vs. Hệ thống:** yêu cầu ngoài phạm vi trợ lý → Giới hạn, kể cả khi trợ lý xử lý giới hạn kém (ca 13).
 - **Ngữ cảnh:** kết quả đúng chính sách nhưng giả định không khớp hoàn cảnh khách (ca 18: số tiền đúng nhưng khách không hiểu cách tính).
@@ -58,7 +58,7 @@ Cách phát hiện phải đo được (event, ngưỡng, tần suất). Ngườ
 
 Xem [dẫn chứng từng ca](dan_chung_nhan_C_bo1_Anh.md): nguyên văn 20 ca từ DOCX, nhãn đề xuất, lý do và ghi chú review của Ánh ở ca 9.
 
-Nguồn: `docs/Ngay13_Lab13_De_bai_hoc_vien.docx`, mục “Hai mươi ca lỗi”. Không phải đáp án chính thức hay kết quả thống nhất với Hà.
+Nguồn: `docs/Ngay13_Lab13_De_bai_hoc_vien.docx`, mục “Hai mươi ca lỗi”. Lý do bộ 1 không phải đáp án chính thức; kết quả thống nhất với Hà được ghi ở bảng phía trên.
 
 | Ca | Lý do |
 | --: | --- |

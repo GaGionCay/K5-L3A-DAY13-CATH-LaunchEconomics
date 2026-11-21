@@ -2,7 +2,7 @@
 
 Nguồn mô tả: [đề bài gốc](../../docs/Ngay13_Lab13_De_bai_hoc_vien.docx), mục “Hai mươi ca lỗi”. Mỗi ca bên dưới giữ nguyên văn mô tả trong DOCX để đối chiếu với [bảng nhãn](bang_loi.md).
 
-Bộ nhãn có Codex hỗ trợ. Ngày 21/11/2026, Ánh xác nhận đã review và đồng ý cả 20 nhãn, bao gồm ca 9 giữ nhãn Do người dùng. Chưa có kết quả so nhãn với Hà.
+Bộ nhãn có Codex hỗ trợ. Ngày 21/11/2026, Ánh xác nhận đã review và đồng ý cả 20 nhãn, bao gồm ca 9 giữ nhãn Do người dùng. Đã đối chiếu với bộ nhãn Hà sau merge: khớp 20/20 = 100%. Ánh xác nhận hai người đã rà và quyết định nhãn riêng trước khi so, rồi thống nhất kết quả; giữ ghi nhận có AI hỗ trợ.
 
 ## Định nghĩa nhãn theo đề bài
 
