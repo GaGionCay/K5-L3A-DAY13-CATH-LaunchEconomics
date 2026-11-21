@@ -6,7 +6,7 @@
 
 Người gắn nhãn 1: Chử Thị Ánh · Người gắn nhãn 2: Hà.
 
-**Bộ 1 là nhãn đề xuất có Codex hỗ trợ đọc đề bài, chưa được Ánh tự rà và xác nhận.** Không ghi nhận đã tự gắn độc lập trong 8 phút. Theo RULES.md, hai người phải gắn độc lập trước khi so; không sửa bộ nhãn độc lập sau khi so. Bộ 2 và kết quả đồng thuận còn trống.
+**Bộ 1 có Codex hỗ trợ đọc đề bài; Ánh đã review và xác nhận đồng ý cả 20 nhãn ngày 21/11/2026, bao gồm ca 9 giữ nhãn Do người dùng.** Không ghi nhận đã tự gắn độc lập trong 8 phút. Theo RULES.md, hai người phải gắn độc lập trước khi so; không sửa bộ nhãn độc lập sau khi so. Bộ 2 và kết quả đồng thuận còn trống.
 
 | Ca | Nhãn người 1 | Nhãn người 2 | Trùng? | Nhãn thống nhất |
 | --: | --- | --- | --- | --- |
@@ -52,6 +52,8 @@ Cách phát hiện phải đo được (event, ngưỡng, tần suất). Ngườ
 | ... | Ngầm | ... | ... | ... |
 
 ## Lý do đề xuất bộ 1 để Ánh tự rà
+
+Xem [dẫn chứng từng ca](dan_chung_nhan_C_bo1_Anh.md): nguyên văn 20 ca từ DOCX, nhãn đề xuất, lý do và ghi chú review của Ánh ở ca 9.
 
 Nguồn: `docs/Ngay13_Lab13_De_bai_hoc_vien.docx`, mục “Hai mươi ca lỗi”. Không phải đáp án chính thức hay kết quả thống nhất với Hà.
 
