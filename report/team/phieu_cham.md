@@ -14,7 +14,7 @@ Nhóm số n chấm nhóm số n + 1; nhóm cuối chấm nhóm 1. Chấm theo b
 
 **Quyết định của hội đồng:** Go có điều kiện
 
-**Lý do:** Bằng chứng kinh tế ủng hộ pilot trong phạm vi noi_dia + hang_nang: 0,49× cả hệ thống, 0,38× trong phạm vi [simulated]; phạm vi thu hẹp có lý do bằng số; thiết kế có đối chứng ngẫu nhiên, đủ 20 cụm mỗi nhóm, ba luật dừng định lượng. Năm điều kiện đều có vai trò phụ trách và hạn kiểm tra. Hội đồng (bản chấm lại sau khi nhóm cập nhật hồ sơ; bản trước: 20/30) lưu ý thêm: dữ liệu mở lại 7 ngày chỉ đủ sau 7 ngày theo dõi, nên nhóm cần ghi rõ luật nào bảo vệ được tuần đầu.
+**Lý do:** Bằng chứng kinh tế ủng hộ pilot trong phạm vi noi_dia + hang_nang: 0,49× cả hệ thống, 0,38× trong phạm vi [simulated]; phạm vi thu hẹp có lý do bằng số; thiết kế có đối chứng ngẫu nhiên, đủ 20 cụm mỗi nhóm, ba luật dừng định lượng. Năm điều kiện đều có vai trò phụ trách và hạn kiểm tra. Hội đồng lưu ý thêm: dữ liệu mở lại 7 ngày chỉ đủ sau 7 ngày theo dõi, nên nhóm cần ghi rõ luật nào bảo vệ được tuần đầu.
 
 **Một câu hỏi cho đội trình:** Chỉ số an toàn là mở lại trong **7 ngày**, nên trong tuần đầu của bước rollout 0,10 chưa có cohort nào đủ 7 ngày theo dõi. Trong tuần đầu, luật dừng nào thực sự bảo vệ khách hàng, và nhóm có dùng chỉ báo sớm nào (ví dụ mở lại trong 48 giờ) không?
 
