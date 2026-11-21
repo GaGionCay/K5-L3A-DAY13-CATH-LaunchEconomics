@@ -26,9 +26,9 @@ pilot:
     description: "Pilot mở rộng toàn bộ 12 depot để phân 20 nhân viên trợ lý và 20 nhân viên đối chứng; dữ liệu lịch sử chỉ ghi nhận D01-D06."
   cost_threshold_vnd: 8000
   cost_rule:
-    label: "Ngưỡng chi phí A3"
+    label: "Ngưỡng chi phí pilot"
     excludes_fixed_costs: true
-    justification: "8.000 đ/việc thành công thấp hơn 12.000 đ/việc nhân viên tự làm; chỉ so sánh chi phí biến đổi, chưa cộng cố định."
+    justification: "8.000 đ = 0,67× của 12.000 đ, khoảng 2,3 lần 3.414 đ (A4, chưa cộng cố định) [simulated]."
     first_week_100_review_cps_vnd: 11743
     first_week_action: "Tuần 1 xem lại 100% có CPS 11.743 đ/việc (simulated, chưa cộng cố định): giữ rollout ở bước hiện tại, không mở rộng; luật chi phí chỉ kích hoạt khi vượt ngưỡng trong 2 tuần liên tiếp."
   assignment:
@@ -75,7 +75,7 @@ pilot:
     predeclared: "Chỉ số chính, ngưỡng, luật dừng và ngày quyết định được chốt trước khi bắt đầu"
   stop_rules:
     - "NẾU mở lại 7 ngày tính trên cả phạm vi của nhóm trợ lý cao hơn đối chứng >= 2 điểm hoặc vượt 6% TRONG 3 ngày liên tiếp, hoặc có >= 1 ca hoàn trùng THÌ Giám đốc vận hành tắt trợ lý trong 30 phút KHÔNG THÌ không được sang bước rollout tiếp; riêng hang_nang baseline 8,23% chỉ là tham chiếu, không áp trần riêng"
-    - "NẾU Ngưỡng chi phí A3: chi phí mỗi việc thành công > 8.000 đ, chưa cộng cố định, TRONG 2 tuần liên tiếp sau tuần 1 THÌ PM thu hẹp về noi_dia và giới hạn 2 lần chạy KHÔNG THÌ không được mở hang_nang; tuần 1 xem lại 100% là 11.743 đ/việc và không được mở rộng rollout"
+    - "NẾU Ngưỡng chi phí pilot: chi phí mỗi việc thành công > 8.000 đ, chưa cộng cố định, TRONG 2 tuần liên tiếp sau tuần 1 THÌ PM thu hẹp về noi_dia và giới hạn 2 lần chạy KHÔNG THÌ không được mở hang_nang; 8.000 đ = 0,67× của 12.000 đ, khoảng 2,3 lần 3.414 đ (A4, chưa cộng cố định) [simulated]; tuần 1 xem lại 100% là 11.743 đ/việc và không được mở rộng rollout"
     - "NẾU tỉ lệ bỏ qua gợi ý > 40% TRONG 1 tuần THÌ Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày KHÔNG THÌ không được chuyển bước rollout"
   interim_looks: "Mỗi tuần chỉ kiểm tra các chỉ số an toàn và luật dừng; tuần 1 xem lại 100% (11.743 đ/việc, chưa cộng cố định) không được mở rộng rollout; chỉ đo chỉ số chính từ bước rollout 0,50"
   rollback: "Giám đốc vận hành bấm cờ tắt, hiệu lực trong 30 phút; khách được phục vụ bằng luồng nhân viên tự làm"
