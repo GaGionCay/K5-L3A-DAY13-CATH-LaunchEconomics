@@ -12,7 +12,7 @@
 | STT | Họ tên | MSSV | Email | GitHub | Vai trò |
 | --: | ------ | ---- | ----- | ------ | ------- |
 |   1 | Nguyễn Thế Cường | 2A202603355 | 26ai.cuongnt2@vinuni.edu.vn | Chill2004 | Người viết code (A, B); sau giải lao kiểm số D1 |
-|   2 |        |      |       |        |         |
+|   2 | Chử Thị Ánh | 2A202603360 | ai26.anhct@vinuni.edu.vn | chuanh1214 | Người gắn nhãn 1; phụ trách E1, E2 và đặc tả event |
 |   3 |        |      |       |        |         |
 |   4 | Nguyễn Thị Thu Hà | 23001603 | nha253158@gmail.com | nha253158-hub | Người gắn nhãn 2, kiêm giữ hồ sơ |
 
@@ -72,3 +72,20 @@ Sao chép mục dưới đây cho từng thành viên.
 ### Bằng chứng
 
 - `report/team/bang_loi.md`, `report/team/ho_so_launch_v0.md`, `report/team/group_report.md`, `report/team/23001603_NguyenThiThuHa.md`
+
+## ChuThiAnh-2A202603360
+
+### Phần việc phụ trách
+
+- Bộ nhãn C số 1; E1 (chỉ số, event), E2 (rủi ro kinh tế) và phần E trong `src/lab13.py`.
+
+### Đóng góp cụ thể
+
+- Review và xác nhận 20 nhãn có Codex hỗ trợ; theo xác nhận của Ánh, hai người rà riêng trước khi so, hai cột nhãn khớp 20/20 = 100%.
+- Hoàn thiện ba chỉ số tính thử: 82,83%, 27,12%, 4,25%; thêm hai chỉ số dùng/an toàn và đặc tả 12 event có trace_id, cách nối và khử lặp.
+- Đối chiếu hai rủi ro với B1: 6.787 đ (+51,77%) và 6.292 đ (+40,70%), đều simulated; bổ sung cảnh báo B4 và đồng bộ phạm vi, ngưỡng theo dõi với pilot hiện tại.
+
+### Bằng chứng
+
+- `src/lab13.py`, `report/team/chi_so.md`, `report/team/bang_loi.md`, `report/team/dan_chung_nhan_C_bo1_Anh.md`, `report/team/2A202603360_ChuThiAnh.md`.
+- Tái lập từ `src/`: `python -X utf8 lab13.py --chi-so --rui-ro`; chạy toàn bộ bằng `python -X utf8 lab13.py`.
