@@ -12,7 +12,7 @@
 - Thực hiện D1: xác định cỡ mẫu theo yêu cầu và theo cụm nhân viên.
 - Thực hiện D2: ghi các điều kiện tách được tác động (identifiability).
 - Thiết lập tỉ lệ mở lại, ngưỡng an toàn và các luật dừng của pilot.
-- Phụ trách `report/team/pilot_01an.yaml` và phần D trong `src/lab13.py`.
+- Phụ trách `report/team/pilot_plan.yaml` và phần D trong `src/lab13.py`.
 - Hoàn thiện A3 sau khi kéo mã của thành viên khác: phạm vi pilot và ngưỡng chi phí.
 
 ## 3. Đóng góp cụ thể
