@@ -2,10 +2,10 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm:
-- Lớp: L3A 
-- Repo nhóm: `K5-L3A-DAY13-TenNhom-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt: https://github.com/GaGionCay/K5-L3A-DAY13-CATH-LaunchEconomics · `main` · `4beac6b`
+- Tên nhóm: CATH
+- Lớp: L3A
+- Repo nhóm: `K5-L3A-DAY13-CATH-LaunchEconomics` (xem [SUBMISSION.md](SUBMISSION.md))
+- URL repo, nhánh nộp, commit chốt: https://github.com/GaGionCay/K5-L3A-DAY13-CATH-LaunchEconomics · `main` · `68ed00c` (commit nội dung cuối; commit sau đó chỉ cập nhật dòng này)
 
 ## Thành viên
 
