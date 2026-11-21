@@ -28,7 +28,8 @@ Nhóm dựng bộ hồ sơ launch v0 cho trợ lý hoàn phí của LogiX-VN nh�
 - **Ba yếu tố nhạy nhất:** 1. Số ca làm lại (+51,8%) · 2. Tỉ lệ xem lại (+40,7%) · 3. Lương nhân viên (+23,1%).
 - **Chỉ số chính trong đợt chạy thử:** 82,83% (994/1.200).
 - **Đề xuất:** Go có điều kiện (sửa lỗi trùng sổ cái, ký chấp nhận 6 điểm, bật event, kế hoạch giảm xem lại).
-- **Kết quả duyệt chéo:** (ghi lại tại buổi duyệt).
+- **Kết quả duyệt chéo (nhóm mình được chấm):** nhóm dimuon chấm **30/30**, quyết định **Go có điều kiện** (10/10 đề xuất khớp bằng chứng · 10/10 số giả lập và phạm vi · 10/10 pilot ra được quyết định). Câu hỏi của hội đồng: vì sao mở pilot ra 12 depot khi dữ liệu chạy thử chỉ có D01–D06, và luật dừng tuần đầu có phản ứng kịp không. Góp ý thêm: B4 nên dùng phút làm lại trung bình của phạm vi (16,25 phút → 12.516 đ = 1,04× [simulated]) thay vì của toàn mẫu (15,3 phút → 12.415 đ = 1,03× [simulated]); kết luận không đổi.
+- **Kết quả duyệt chéo (nhóm mình chấm):** nhóm CATH chấm nhóm 3ConChatLGPT **30/30**, quyết định **Go có điều kiện** (10/10 đề xuất khớp bằng chứng · 10/10 số giả lập và phạm vi · 10/10 pilot ra được quyết định). Lý do chính: phạm vi noi_dia + hang_nang có lý do bằng số (loại quoc_te 1,88×, doi_tac 0,85× [simulated]); pilot chia ngẫu nhiên theo nhân viên 20 + 20, đủ mẫu ở mức chênh 6 điểm; 3 luật dừng có ngưỡng, thời hạn và người có quyền dừng. Câu hỏi của hội đồng: chỉ số mở lại 7 ngày chưa đo được trong tuần đầu, vậy luật nào bảo vệ khách trong tuần 1. Xem [`phieu_cham.md`](phieu_cham.md).
 
 ## 5. Khó khăn và cách xử lý
 
