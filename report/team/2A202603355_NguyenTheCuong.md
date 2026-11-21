@@ -1,10 +1,10 @@
-# Báo cáo cá nhân — HoVaTen-MSSV
+# Báo cáo cá nhân — NguyenTheCuong-2A202603355
 
 ## 1. Thông tin thành viên
 
-- Họ tên: <Nguyễn Thế Cường>
-- MSSV: <2A202603355>
-- Email: <26ai.cuongnt2@vinuni.edu.vn>
+- Họ tên: Nguyễn Thế Cường
+- MSSV: 2A202603355
+- Email: 26ai.cuongnt2@vinuni.edu.vn
 - Vai trong nhóm: người viết code (nhiệm vụ A, B); sau giải lao kiểm số D1 cho người viết code mới
 
 ## 2. Phần việc phụ trách
