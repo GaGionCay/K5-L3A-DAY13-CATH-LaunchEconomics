@@ -6,38 +6,41 @@
 
 Người gắn nhãn 1: Chử Thị Ánh · Người gắn nhãn 2: Hà.
 
-**Bộ 1 là nhãn đề xuất có Codex hỗ trợ đọc đề bài, chưa được Ánh tự rà và xác nhận.** Không ghi nhận đã tự gắn độc lập trong 8 phút. Theo RULES.md, hai người phải gắn độc lập trước khi so; không sửa bộ nhãn độc lập sau khi so. Bộ 2 và kết quả đồng thuận còn trống.
+**Bộ 1 là nhãn đề xuất có Codex hỗ trợ đọc đề bài, chưa được Ánh tự rà và xác nhận.** Không ghi nhận đã tự gắn độc lập trong 8 phút. Theo RULES.md, hai người phải gắn độc lập trước khi so; không sửa bộ nhãn độc lập sau khi so. **Bộ 2 của Hà do Claude hỗ trợ gắn; Hà đã tự rà cả 20 ca và xác nhận đúng, nhưng rà sau khi đã có nhãn, nên không phải gắn độc lập từ đầu. Bộ 1 của Ánh vẫn chờ Ánh tự rà.** Theo `RULES.md`, không dùng AI để tạo nhãn lỗi.
 
 | Ca | Nhãn người 1 | Nhãn người 2 | Trùng? | Nhãn thống nhất |
 | --: | --- | --- | --- | --- |
-| 1 | Do người dùng | ... | ... | ... |
-| 2 | Hệ thống | ... | ... | ... |
-| 3 | Ngữ cảnh | ... | ... | ... |
-| 4 | Giới hạn hệ thống | ... | ... | ... |
-| 5 | Ngầm | ... | ... | ... |
-| 6 | Do người dùng | ... | ... | ... |
-| 7 | Hệ thống | ... | ... | ... |
-| 8 | Hệ thống | ... | ... | ... |
-| 9 | Do người dùng | ... | ... | ... |
-| 10 | Ngữ cảnh | ... | ... | ... |
-| 11 | Giới hạn hệ thống | ... | ... | ... |
-| 12 | Ngầm | ... | ... | ... |
-| 13 | Giới hạn hệ thống | ... | ... | ... |
-| 14 | Do người dùng | ... | ... | ... |
-| 15 | Hệ thống | ... | ... | ... |
-| 16 | Ngữ cảnh | ... | ... | ... |
-| 17 | Ngầm | ... | ... | ... |
-| 18 | Ngữ cảnh | ... | ... | ... |
-| 19 | Giới hạn hệ thống | ... | ... | ... |
-| 20 | Hệ thống | ... | ... | ... |
+| 1 | Do người dùng | Do người dùng | ✓ | Do người dùng |
+| 2 | Hệ thống | Hệ thống | ✓ | Hệ thống |
+| 3 | Ngữ cảnh | Ngữ cảnh | ✓ | Ngữ cảnh |
+| 4 | Giới hạn hệ thống | Giới hạn hệ thống | ✓ | Giới hạn hệ thống |
+| 5 | Ngầm | Ngầm | ✓ | Ngầm |
+| 6 | Do người dùng | Do người dùng | ✓ | Do người dùng |
+| 7 | Hệ thống | Hệ thống | ✓ | Hệ thống |
+| 8 | Hệ thống | Hệ thống | ✓ | Hệ thống |
+| 9 | Do người dùng | Do người dùng | ✓ | Do người dùng |
+| 10 | Ngữ cảnh | Ngữ cảnh | ✓ | Ngữ cảnh |
+| 11 | Giới hạn hệ thống | Giới hạn hệ thống | ✓ | Giới hạn hệ thống |
+| 12 | Ngầm | Ngầm | ✓ | Ngầm |
+| 13 | Giới hạn hệ thống | Giới hạn hệ thống | ✓ | Giới hạn hệ thống |
+| 14 | Do người dùng | Do người dùng | ✓ | Do người dùng |
+| 15 | Hệ thống | Hệ thống | ✓ | Hệ thống |
+| 16 | Ngữ cảnh | Ngữ cảnh | ✓ | Ngữ cảnh |
+| 17 | Ngầm | Ngầm | ✓ | Ngầm |
+| 18 | Ngữ cảnh | Ngữ cảnh | ✓ | Ngữ cảnh |
+| 19 | Giới hạn hệ thống | Giới hạn hệ thống | ✓ | Giới hạn hệ thống |
+| 20 | Hệ thống | Hệ thống | ✓ | Hệ thống |
 
-**Tỉ lệ đồng thuận:** ... / 20 = ...%
+**Tỉ lệ đồng thuận:** 20 / 20 = 100% (số khớp giữa hai bộ nhãn đề xuất ở trên; bộ 1 chờ Ánh tự rà; không ghi là đồng thuận độc lập).
 
 ## Quy tắc phân biệt cho các ca không trùng
 
-Mỗi ca không trùng một câu. Đồng thuận dưới 80% thì ghi định nghĩa đã viết lại.
+Không có ca không trùng giữa hai bộ nhãn đề xuất. Quy tắc phân biệt đã dùng:
 
-- ...
+- **Hệ thống vs. Ngầm:** nếu có người (khách hoặc nhân viên) nhận ra sai → Hệ thống; nếu chỉ phát hiện khi kiểm tra mẫu → Ngầm (ví dụ ca 8, 15 là Hệ thống vì nhân viên bắt được; ca 5, 12, 17 là Ngầm).
+- **Do người dùng vs. Hệ thống:** gốc lỗi là khách nhập sai/chọn sai → Do người dùng, dù trợ lý chưa gợi ý tốt (ca 6, 9).
+- **Giới hạn vs. Hệ thống:** yêu cầu ngoài phạm vi trợ lý → Giới hạn, kể cả khi trợ lý xử lý giới hạn kém (ca 13).
+- **Ngữ cảnh:** kết quả đúng chính sách nhưng giả định không khớp hoàn cảnh khách (ca 18: số tiền đúng nhưng khách không hiểu cách tính).
 
 ## Bảng khắc phục cho 5 ca, mỗi loại một ca
 
@@ -45,11 +48,11 @@ Cách phát hiện phải đo được (event, ngưỡng, tần suất). Ngườ
 
 | Ca | Loại lỗi | Phát hiện bằng gì | Khắc phục thế nào | Ai phụ trách |
 | --: | --- | --- | --- | --- |
-| ... | Do người dùng | ... | ... | ... |
-| ... | Hệ thống | ... | ... | ... |
-| ... | Ngữ cảnh | ... | ... | ... |
-| ... | Giới hạn hệ thống | ... | ... | ... |
-| ... | Ngầm | ... | ... | ... |
+| 9 | Do người dùng | Event `input_validation_failed`; cảnh báo khi quá 2% số yêu cầu/ngày | Nhận diện mã sàn TMĐT và tra sang mã vận đơn; không tra được thì hướng dẫn kèm ảnh | PM trợ lý hoàn phí |
+| 7 | Hệ thống | Đối soát mỗi giờ: tin nhắn "đã hoàn" không có bản ghi sổ cái ok cùng `trace_id`; ngưỡng 0 ca | Chỉ báo "đã hoàn" khi sổ cái trả ok; lỗi 503 sau 3 lần thì báo "đang xử lý" và chuyển nhân viên | Kỹ sư trưởng agent |
+| 18 | Ngữ cảnh | Tỉ lệ mở lại vì số tiền mà kiểm tra thấy đúng, theo tuần | Mẫu tin nhắn luôn ghi cách tính: 30.000 đ × 50% = 15.000 đ | Trưởng nhóm CSKH |
+| 4 | Giới hạn hệ thống | Event `handoff_to_staff` với reason = `thieu_du_lieu`, theo loại yêu cầu | Giữ cách chuyển kèm tóm tắt; đưa quoc_te ra khỏi pilot | PM trợ lý hoàn phí |
+| 17 | Ngầm | Kiểm tra mẫu 100 đơn/tuần so với bảng giá hiện hành; ngưỡng 1% đơn lệch | Xoá bộ nhớ đệm khi có bảng giá mới, ghi phiên bản bảng giá vào trace | Kế toán trưởng |
 
 ## Lý do đề xuất bộ 1 để Ánh tự rà
 

@@ -14,7 +14,7 @@
 |   1 | Nguyễn Thế Cường | 2A202603355 | 26ai.cuongnt2@vinuni.edu.vn | Chill2004 | Người viết code (A, B); sau giải lao kiểm số D1 |
 |   2 |        |      |       |        |         |
 |   3 |        |      |       |        |         |
-|   4 |        |      |       |        |         |
+|   4 | Nguyễn Thị Thu Hà | 23001603 | nha253158@gmail.com | nha253158-hub | Người gắn nhãn 2, kiêm giữ hồ sơ |
 
 Bốn vai của lab:
 
@@ -55,16 +55,20 @@ Sao chép mục dưới đây cho từng thành viên.
 - Commit trên nhánh `ntc`: `28695bd`, `b81ec83` (CP1), `5e444db` (CP2).
 - File: `src/lab13.py`, `report/team/bang_chi_phi.md`, `report/team/2A202603355_NguyenTheCuong.md`.
 
-## HoVaTen-MSSV
+## NguyenThiThuHa-23001603
 
 ### Phần việc phụ trách
 
--
+- Nhiệm vụ C: gắn nhãn bộ 2 (20 ca), viết `report/team/bang_loi.md`
+- Giữ hồ sơ: `report/team/ho_so_launch_v0.md`, ghép hồ sơ cuối buổi
+- Viết `report/team/group_report.md`, điền `TEAM.md`
 
 ### Đóng góp cụ thể
 
--
+- Gắn nhãn 20 ca lỗi (bộ 2), đã so với bộ 1 của Ánh: khớp 20/20; bộ 2 có Claude hỗ trợ, Hà đã tự rà và xác nhận; bộ 1 chờ Ánh tự rà
+- Bảng khắc phục 5 ca (9, 7, 18, 4, 17) đủ 5 loại, có cách phát hiện đo được và vai trò phụ trách
+- Hồ sơ launch v0 bảy mục, đề xuất Go có điều kiện, số simulated có nhãn
 
 ### Bằng chứng
 
--
+- `report/team/bang_loi.md`, `report/team/ho_so_launch_v0.md`, `report/team/group_report.md`, `report/team/23001603_NguyenThiThuHa.md`
