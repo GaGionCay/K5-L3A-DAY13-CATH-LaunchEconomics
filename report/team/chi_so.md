@@ -12,6 +12,18 @@
 
 Các tỉ lệ mô tả đợt chạy thử trên dữ liệu giả lập. Đợt chạy thử chưa có nhóm đối chứng. Tái lập trong thư mục `src/` bằng `python -X utf8 lab13.py --chi-so`.
 
+### Đối chiếu phạm vi pilot đã cấu hình
+
+Theo `pilot_plan.yaml`, chỉ nhận `noi_dia` + `hang_nang` tại D01–D12; dữ liệu lịch sử chỉ có D01–D06. Lọc CSV theo loại và depot trong cấu hình được 982 yêu cầu. Dùng cùng hàm `tinh_chi_so` trên tập đã lọc cho kết quả:
+
+| Chỉ số | Tử số / mẫu số | Tỉ lệ |
+| --- | --- | --- |
+| Đóng trong 24 giờ, không mở lại 7 ngày | 906 / 982 | 92,26% |
+| Bỏ qua gợi ý trong số được xem lại | 27 / 128 | 21,09% |
+| Mở lại 7 ngày | 39 / 982 | 3,97% |
+
+Đây vẫn là mô tả dữ liệu giả lập lịch sử, không chứng minh cải thiện do trợ lý và không đại diện dữ liệu chưa có của D07–D12. Ba số toàn bộ mẫu ở E1 giữ nguyên để đối chiếu đề bài. Baseline 0,70 trong thiết kế thử nghiệm là giả định của đề, không thay bằng 92,26%.
+
 ## Danh sách event
 
 Mọi event có `event_id`, `event_at`, `request_id` và `trace_id`. Hệ thống cấp `trace_id` khi tạo yêu cầu ở cả hai nhánh và truyền mã này qua các lần chạy, giao diện nhân viên, hệ thống ticket và kiểm toán. Đếm yêu cầu duy nhất theo `request_id`.
@@ -26,6 +38,10 @@ Mọi event có `event_id`, `event_at`, `request_id` và `trace_id`. Hệ thốn
 | `ticket_closed` | Hệ thống ticket | `closed_at` | Khi ticket chuyển sang trạng thái đóng |
 | `ticket_reopened` | Hệ thống ticket | `reopened_at`, `reason` | Khi ticket mở lại |
 | `audit_sample_checked` | Bộ phận kế toán | `audit_batch_id`, `refunded_amount_vnd`, `correct_amount_vnd` | Khi chốt kết quả đối soát của yêu cầu được chọn |
+| `input_validation_failed` | Hệ thống tiếp nhận | `field`, `error_code`, `input_type`, `expected_type` | Khi đầu vào không hợp lệ; không ghi đầy đủ số tài khoản vào log |
+| `handoff_to_staff` | Agent | `staff_id`, `reason`, `summary_ref` | Khi chuyển sang nhân viên, kể cả thiếu dữ liệu hoặc lỗi ghi sổ |
+| `refund_ledger_write` | Dịch vụ sổ cái | `refund_id`, `refund_key`, `idempotency_key`, `order_id`, `amount_vnd`, `status`, `price_version` | Sau mỗi lần thử ghi sổ, kể cả lỗi và lặp |
+| `refund_notification_sent` | Dịch vụ thông báo | `refund_id`, `refund_key`, `notification_status`, `claimed_refund_status` | Khi gửi thông báo trạng thái hoàn tiền cho khách |
 
 ### Kiểm tra chéo
 
@@ -34,6 +50,9 @@ Mọi event có `event_id`, `event_at`, `request_id` và `trace_id`. Hệ thốn
 - **Mở lại trong 7 ngày:** Cùng cohort với chỉ số chính. Nối `ticket_closed` đầu tiên với `ticket_reopened` trong 7 ngày sau đó và đếm mỗi yêu cầu tối đa một lần. Dùng cùng mốc chốt dữ liệu cho hai nhánh, theo dõi đủ 7 ngày sau lần đóng trước khi kết luận về yêu cầu đã đóng.
 - **Hiển thị gợi ý:** Lọc `refund_request_created.arm` theo nhánh trợ lý và nối với `agent_suggestion_shown`.
 - **Hoàn sai số tiền:** So sánh hai trường số tiền trong `audit_sample_checked` theo từng đợt kiểm toán tuần và đếm mỗi yêu cầu đã kiểm toán xong một lần.
+- **Lỗi nhập và chuyển nhân viên:** Đếm yêu cầu có `input_validation_failed` trên tổng yêu cầu cùng ngày; nhóm `handoff_to_staff` theo `reason`, loại yêu cầu và tuần. Đây là tín hiệu phục vụ bảng khắc phục C.
+- **Hoàn trùng:** `refund_key` xác định cùng nghĩa vụ hoàn tiền (đơn, loại phí và lần hoàn hợp lệ), dùng chung khi khách tạo lại yêu cầu. Đếm ít nhất hai `refund_id` khác nhau ghi sổ `status = ok` cho cùng `refund_key`; không coi hai log gửi lặp của cùng giao dịch là hai lần hoàn. Từ một ca xác nhận hoàn trùng, áp dụng luật dừng an toàn của pilot.
+- **Báo hoàn nhưng chưa ghi sổ:** Đối soát mỗi giờ các `refund_notification_sent` có `claimed_refund_status = completed` với giao dịch `refund_ledger_write.status = ok` theo `refund_id`; không có bản ghi khớp thì cảnh báo. `price_version` hỗ trợ kiểm toán bảng giá cũ ở ca 17.
 
 ### Quy ước đo trong pilot
 
@@ -41,7 +60,8 @@ Mọi event có `event_id`, `event_at`, `request_id` và `trace_id`. Hệ thốn
 - Loại event gửi lặp theo `event_id` trước khi nối bảng; đếm yêu cầu theo `request_id`. Event thiếu mã nối được đưa vào danh sách lỗi dữ liệu để xử lý, không âm thầm bỏ khỏi mẫu số cohort.
 - Với yêu cầu đóng muộn, chỉ kết luận chỉ số mở lại sau đủ 7 ngày từ lần đóng đầu tiên. Báo riêng số yêu cầu chưa đủ thời gian theo dõi và số chưa đóng; chưa so sánh an toàn giữa hai nhánh nếu độ trưởng thành dữ liệu khác nhau.
 - Mẫu số bằng 0 thì ghi “không xác định”, không ghi 0%. Kiểm toán chỉ phản ánh mẫu đã kiểm tra, không mặc nhiên đại diện toàn bộ yêu cầu.
-- Các event có `review_minutes` và `rework_minutes` cho phép thay chi phí thời gian simulated bằng thời gian đo trong pilot; ngưỡng dừng và quyền dừng cần khớp kế hoạch của Trí khi ghép bài.
+- Các event có `review_minutes` và `rework_minutes` cho phép thay chi phí thời gian simulated bằng thời gian đo trong pilot. Theo kế hoạch hiện tại: mở lại cao hơn đối chứng ít nhất 2 điểm hoặc vượt 6% trong 3 ngày liên tiếp, hoặc có ít nhất một ca hoàn trùng, thì Giám đốc vận hành tắt trợ lý trong 30 phút. Dùng cohort đủ thời gian theo dõi; không coi yêu cầu chưa đủ 7 ngày là không mở lại.
+- Tỉ lệ bỏ qua gợi ý trên 40% trong một tuần: Trưởng nhóm CSKH phỏng vấn 5 nhân viên trong 3 ngày theo luật pilot. Ngưỡng này khác ngưỡng cảnh báo số lượng xem lại trong E2.
 
 ## E2 · Rủi ro kinh tế
 
@@ -51,12 +71,12 @@ Tái lập: chạy `python -X utf8 lab13.py --rui-ro` trong `src/` (có thể th
 
 - Làm lại gấp đôi: `(4.373.585,132 + 2.264.000) / 978`; mức tăng `2.264.000 / 4.373.585,132` (**simulated**).
 - Xem lại gấp đôi: `(4.373.585,132 + 1.780.000) / 978`; mức tăng `1.780.000 / 4.373.585,132` (**simulated**).
-- Các ngưỡng theo dõi dưới đây là đề xuất quản trị, chưa phải ngưỡng suy ra từ B1 hoặc luật dừng đã được nhóm duyệt. Tỉ lệ xem lại 29,50% dùng mốc toàn bộ mẫu; cần tính lại mốc khi phạm vi pilot được chốt.
+- Các ngưỡng rà trace dưới đây là cảnh báo quản trị bổ sung, không thay thế luật dừng trong pilot. Trong phạm vi lịch sử đã lọc, xem lại là `128/982 = 13,03%`; gấp đôi là `256/982 = 26,07%`. Làm lại có phút simulated dương là `48/982 = 4,89%` (simulated). B1 vẫn tính toàn bộ mẫu; không suy diễn chi phí B1 thành chi phí riêng phạm vi pilot.
 
 | Rủi ro | Tác động đã tính | Dấu hiệu theo dõi | Hành động | Người phụ trách |
 | --- | --- | --- | --- | --- |
 | Số ca làm lại tăng gấp đôi với số phút trung bình mỗi ca giữ nguyên | **6.787 đ/việc thành công (+51,77%, simulated)** | Tỉ lệ làm lại theo tuần vượt 7%, tính từ số yêu cầu có `staff_rework_completed` chia số yêu cầu nhánh trợ lý | Rà tối đa 20 trace làm lại trong tuần, ưu tiên loại có nhiều ca nhất trước khi chuyển bước pilot | PM trợ lý hoàn phí |
-| Tỉ lệ xem lại tăng gấp đôi với số phút trung bình mỗi ca giữ nguyên | **6.292 đ/việc thành công (+40,70%, simulated)** | Tỉ lệ yêu cầu được xem lại đạt 29,50% trong một tuần, gấp đôi mức chạy thử 177/1.200 = 14,75% | Rà tối đa 20 quyết định xem lại theo loại yêu cầu và nguyên nhân, điều chỉnh luồng xem lại trước khi chuyển bước pilot | Trưởng nhóm CSKH |
+| Tỉ lệ xem lại tăng gấp đôi với số phút trung bình mỗi ca giữ nguyên | **6.292 đ/việc thành công (+40,70%, simulated)** | Sau tuần 1 xem lại 100%, tỉ lệ yêu cầu được xem lại trong phạm vi pilot đạt 26,07% trong một tuần, gấp đôi mốc lịch sử 128/982 | Rà tối đa 20 quyết định xem lại theo loại yêu cầu và nguyên nhân, điều chỉnh luồng xem lại trước khi chuyển bước pilot | Trưởng nhóm CSKH |
 
 ### Cảnh báo bổ sung từ B4 đã có kết quả
 
@@ -65,5 +85,5 @@ Tái lập: chạy `python -X utf8 lab13.py --rui-ro` trong `src/` (có thể th
 ### Trạng thái bàn giao
 
 - Đã xong: E1; hai dòng E2 khớp B1 của Cường; cảnh báo thời gian xem lại/làm lại có nguồn B4.
-- Chờ Trí: phạm vi pilot cuối cùng, ngưỡng an toàn, luật dừng và quyền dừng trong `pilot_plan.yaml`; sau đó mới căn chỉnh ngưỡng theo dõi E2 và phạm vi đo E1.
-- Chờ Hà ghép hồ sơ: đưa E1/E2 vào mục 4 và 7 của `ho_so_launch_v0.md` sau khi có các phần còn lại; không tự kết luận Go khi C/D chưa đủ bằng chứng.
+- Đã đối chiếu phạm vi, ngưỡng và quyền dừng theo `pilot_plan.yaml` hiện tại; đã bổ sung event cho các tín hiệu C và hoàn trùng. Luật chi phí áp dụng khi vượt 8.000 đ/việc trong hai tuần liên tiếp sau tuần 1; tuần 1 không mở rộng rollout.
+- Hà đã ghép chỉ số vào mục 4 và rủi ro vào mục 7 của `ho_so_launch_v0.md`. Các event trên là đặc tả cần triển khai, không phải bằng chứng hệ thống đã phát event thật.
