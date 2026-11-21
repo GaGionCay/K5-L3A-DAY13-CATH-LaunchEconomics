@@ -21,6 +21,8 @@ BASELINE = 12000    # đồng cho 1 yêu cầu khi nhân viên tự làm (6 phú
 
 # ---------- Nhiệm vụ D · Cấu hình pilot ----------
 PILOT_CONFIG_PATH = Path(__file__).resolve().parents[1] / 'report' / 'team' / 'pilot_plan.yaml'
+PILOT_COST_LABEL = 'Ngưỡng chi phí pilot'
+PILOT_COST_RATIONALE = '8.000 đ = 0,67× của 12.000 đ, khoảng 2,3 lần 3.414 đ (A4, chưa cộng cố định) [simulated].'
 
 
 def co_mau_hai_ty_le(p1, p2, alpha=0.05, power=0.80):
@@ -47,15 +49,16 @@ def tai_cau_hinh_pilot(path=PILOT_CONFIG_PATH):
     if not isinstance(scope, dict) or not scope.get('included_request_types') or not scope.get('included_depots'):
         raise ValueError('Phạm vi A3 phải có loại yêu cầu và depot được đưa vào pilot.')
     if not isinstance(pilot['cost_threshold_vnd'], (int, float)) or pilot['cost_threshold_vnd'] <= 0:
-        raise ValueError('Ngưỡng chi phí A3 phải là số dương theo đồng/việc thành công.')
+        raise ValueError('Ngưỡng chi phí pilot phải là số dương theo đồng/việc thành công.')
     if (pilot['assignment'].get('planned_staff_total', 0)
             < 2 * pilot['sample_size']['staff_per_arm']):
         raise ValueError('Pilot cần đủ nhân viên cho 20 cụm mỗi nhánh.')
     cost_rule = pilot['cost_rule']
-    if (cost_rule.get('label') != 'Ngưỡng chi phí A3'
+    if (cost_rule.get('label') != PILOT_COST_LABEL
+            or cost_rule.get('justification') != PILOT_COST_RATIONALE
             or cost_rule.get('first_week_100_review_cps_vnd') != 11743
             or not cost_rule.get('excludes_fixed_costs')):
-        raise ValueError('Thiếu cấu hình Ngưỡng chi phí A3 hoặc xử lý tuần xem lại 100%.')
+        raise ValueError('Thiếu cấu hình Ngưỡng chi phí pilot hoặc xử lý tuần xem lại 100%.')
     if pilot['assignment']['unit'] != 'staff' or pilot['primary_metric']['clusters_per_arm'] < 20:
         raise ValueError('Pilot phải phân bổ theo nhân viên với ít nhất 20 cụm mỗi nhánh.')
     if pilot['primary_metric']['n_per_arm'] != pilot['sample_size']['accepted_n_per_arm']:
@@ -89,6 +92,7 @@ def danh_gia_reopen_rate(reqs, pilot):
         'reopen_aggregation': reopen['aggregation'],
         'hang_nang_reference_rate': reopen['hang_nang_reference_rate'],
         'cost_threshold_label': pilot['cost_rule']['label'],
+        'cost_threshold_justification': pilot['cost_rule']['justification'],
         'cost_threshold_vnd': pilot['cost_threshold_vnd'],
         'cost_excludes_fixed_costs': pilot['cost_rule']['excludes_fixed_costs'],
         'first_week_100_review_cps_vnd': pilot['cost_rule']['first_week_100_review_cps_vnd'],
