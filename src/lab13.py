@@ -3,6 +3,7 @@ Chạy trong thư mục src/: python3 lab13.py   (cần pandas; Nhiệm vụ D c
 Không cần khoá API. Điền các chỗ ghi VIẾT Ở ĐÂY (đánh dấu TODO CP1…CP4). Dữ liệu trong hai file CSV là giả lập.
 Bản gốc chưa sửa nằm ở lab13_starter.py.
 """
+import argparse
 import math
 import pandas as pd
 
@@ -53,9 +54,63 @@ def mo_hinh(runs, reqs, gia_vao=26, gia_ra=130, gia_tool=15, luong_phut=2000,
     raise NotImplementedError('VIẾT Ở ĐÂY')
 
 
+# ---------- Nhiệm vụ E1 · Chỉ số đợt chạy thử ----------
+def tinh_chi_so(reqs):
+    """Trả về tử số và mẫu số của từng chỉ số, mỗi dòng CSV là một yêu cầu."""
+    da_xem_lai = reqs.loc[reqs['duoc_xem_lai'].eq(1)]
+    mo_lai = reqs['mo_lai_trong_7_ngay'].eq(1)
+    dong_dat = reqs['dong_trong_24h'].eq(1) & reqs['mo_lai_trong_7_ngay'].eq(0)
+    bo_qua = da_xem_lai['quyet_dinh_xem_lai'].isin(['sua', 'bo'])
+    return {
+        'Đóng trong 24 giờ, không mở lại trong 7 ngày': (dong_dat.sum(), len(reqs)),
+        'Bỏ qua gợi ý': (bo_qua.sum(), len(da_xem_lai)),
+        'Mở lại trong 7 ngày': (mo_lai.sum(), len(reqs)),
+    }
+
+
+def in_chi_so(reqs):
+    print('E1 · Chỉ số trong đợt chạy thử')
+    for ten, (tu_so, mau_so) in tinh_chi_so(reqs).items():
+        ty_le = f'{tu_so / mau_so:.2%}' if mau_so else 'không xác định'
+        print(f'{ten}: {tu_so}/{mau_so} ({ty_le})')
+
+
+def in_rui_ro_kinh_te(runs, reqs):
+    """Đối chiếu riêng hai dòng E2; không thay thế bảng B1 của nhóm."""
+    token = (runs['tokens_in'].sum() * GIA_VAO
+             + runs['tokens_out'].sum() * GIA_RA) / 1000
+    tool = runs['tool_calls'].sum() * GIA_TOOL
+    xem_lai = reqs['phut_xem_lai_simulated'].sum() * LUONG_PHUT
+    lam_lai = reqs['phut_lam_lai_simulated'].sum() * LUONG_PHUT
+    tong = token + tool + xem_lai + lam_lai
+    thanh_cong = reqs['ket_qua'].eq('thanh_cong').sum()
+    print('E2 · Toàn bộ mẫu, chi phí simulated; chờ đối chiếu B1')
+    print(f'Token: {token:.3f}; tool: {tool:.3f}')
+    print(f'Xem lại: {xem_lai:.3f}; làm lại: {lam_lai:.3f}')
+    print(f'Tổng gốc: {tong:.3f}; số việc thành công: {thanh_cong}')
+    if not thanh_cong or not tong:
+        print('Không xác định chi phí mỗi việc hoặc mức thay đổi do mẫu số bằng 0')
+        return
+    print(f'Chi phí gốc: {tong / thanh_cong:.2f} đ/việc (simulated)')
+    for ten, tang_them in [('Làm lại gấp đôi', lam_lai), ('Xem lại gấp đôi', xem_lai)]:
+        print(f'{ten}: {(tong + tang_them) / thanh_cong:.2f} đ/việc; '
+              f'+{tang_them / tong:.2%} (simulated)')
+
+
 if __name__ == '__main__':
-    runs = pd.read_csv('logix_runs.csv')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--chi-so', action='store_true', help='Chỉ tính ba chỉ số E1')
+    parser.add_argument('--rui-ro', action='store_true', help='Đối chiếu hai dòng E2 độc lập với A/B')
+    args = parser.parse_args()
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
+    if args.chi_so or args.rui_ro:
+        if args.chi_so:
+            in_chi_so(reqs)
+        if args.rui_ro:
+            in_rui_ro_kinh_te(pd.read_csv('logix_runs.csv'), reqs)
+        raise SystemExit(0)
+
+    runs = pd.read_csv('logix_runs.csv')
     kiem_tra_dap_an_biet_truoc()
     ket_qua = mo_hinh(runs, reqs)
     for ten, gia_tri in ket_qua.items():
@@ -65,3 +120,4 @@ if __name__ == '__main__':
     # TODO CP4 · Nhiệm vụ D: cỡ mẫu.
     #   from statsmodels.stats.proportion import proportion_effectsize
     #   from statsmodels.stats.power import NormalIndPower
+    in_chi_so(reqs)
